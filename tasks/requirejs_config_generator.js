@@ -14,16 +14,26 @@ module.exports = function(grunt) {
   // creation: http://gruntjs.com/creating-tasks
 
   grunt.registerMultiTask('requirejs_config_generator', 'concatenating into final requirejs config file', function() {
-    // Merge task-specific and/or target-specific options with these defaults.
-    var options = this.options({
-      punctuation: '.',
-      separator: ', '
-    });
 
+    var
+      _extend = function (dest, source) {
+        var
+          objKey;
+        for (objKey in source) {
+          dest[objKey] = source[objKey];
+        }
+        return dest;
+      },
+      requirejsConfig = {
+        baseUrl: '',
+        deps: [],
+        paths: {},
+        shim: {}
+      };
     // Iterate over all specified file groups.
     this.files.forEach(function(f) {
       // Concat specified files.
-      var src = f.src.filter(function(filepath) {
+      f.src.filter(function(filepath) {
         // Warn on and remove invalid source files (if nonull was set).
         if (!grunt.file.exists(filepath)) {
           grunt.log.warn('Source file "' + filepath + '" not found.');
@@ -33,12 +43,23 @@ module.exports = function(grunt) {
         }
       }).map(function(filepath) {
         // Read file source.
-        return grunt.file.read(filepath);
-      }).join(grunt.util.normalizelf(options.separator));
+        return grunt.file.readJSON(filepath);
+      }).forEach(function(config) {
+        if (config.baseUrl) {
+          requirejsConfig.baseUrl = config.baseUrl;
+        }
+        if (config.deps) {
+          requirejsConfig.deps = requirejsConfig.deps.concat(config.deps);
+        }
+        if (config.paths) {
+          requirejsConfig.paths = _extend(requirejsConfig.paths, config.paths);
+        }
+        if (config.shim) {
+          requirejsConfig.shim = _extend(requirejsConfig.shim, config.shim);
+        }
+      });
 
-      // Handle options.
-      src += options.punctuation;
-
+      var src = 'requirejs.config(' + JSON.stringify(requirejsConfig) + ');';
       // Write the destination file.
       grunt.file.write(f.dest, src);
 

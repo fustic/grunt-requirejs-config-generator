@@ -1,0 +1,1 @@
+requirejs.config({"baseUrl":"js","deps":["deps0","deps1"],"paths":{"util":"util","common":"common","anotherPath":"anotherPath"},"shim":{"jquery":{"exports":"jQuery"}}});

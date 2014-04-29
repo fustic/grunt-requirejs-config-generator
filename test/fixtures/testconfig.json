@@ -1,0 +1,12 @@
+{
+  "deps": ["deps0"],
+  "paths": {
+    "util": "util",
+    "common": "common"
+  },
+  "shim": {
+    "jquery": {
+      "exports": "jQuery"
+    }
+  }
+}

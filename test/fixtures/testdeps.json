@@ -1,0 +1,7 @@
+{
+  "baseUrl": "js",
+  "deps": ["deps1"],
+  "paths": {
+    "anotherPath": "anotherPath"
+  }
+}

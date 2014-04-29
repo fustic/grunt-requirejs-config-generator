@@ -1,6 +1,6 @@
 {
   "name": "grunt-requirejs-config-generator",
-  "description": "concatinating into final requirejs config file",
+  "description": "concatenating into final requirejs config file",
   "version": "0.0.1",
   "homepage": "https://github.com/fustic/grunt-requirejs-config-generator",
   "author": {
