@@ -14,24 +14,22 @@ module.exports = function(grunt) {
   // creation: http://gruntjs.com/creating-tasks
 
   grunt.registerMultiTask('requirejs_config_generator', 'concatenating into final requirejs config file', function() {
-
-    var
-      _extend = function (dest, source) {
-        var
-          objKey;
-        for (objKey in source) {
-          dest[objKey] = source[objKey];
-        }
-        return dest;
-      },
-      requirejsConfig = {
+    var _extend = function (dest, source) {
+      var
+        objKey;
+      for (objKey in source) {
+        dest[objKey] = source[objKey];
+      }
+      return dest;
+    };
+    // Iterate over all specified file groups.
+    this.files.forEach(function(f) {
+      var requirejsConfig = {
         baseUrl: '',
         deps: [],
         paths: {},
         shim: {}
       };
-    // Iterate over all specified file groups.
-    this.files.forEach(function(f) {
       // Concat specified files.
       f.src.filter(function(filepath) {
         // Warn on and remove invalid source files (if nonull was set).
@@ -67,5 +65,4 @@ module.exports = function(grunt) {
       grunt.log.writeln('File "' + f.dest + '" created.');
     });
   });
-
 };
