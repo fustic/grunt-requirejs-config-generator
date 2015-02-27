@@ -28,10 +28,14 @@ exports.requirejs_config_generator = {
     done();
   },
   default_options: function(test) {
-    test.expect(1);
+    test.expect(2);
 
     var actual = grunt.file.read('tmp/config.js');
     var expected = grunt.file.read('test/expected/config.js');
+    test.equal(actual, expected, 'should describe what the default behavior is.');
+
+    actual = grunt.file.read('tmp/config2.js');
+    expected = grunt.file.read('test/expected/config2.js');
     test.equal(actual, expected, 'should describe what the default behavior is.');
 
     test.done();

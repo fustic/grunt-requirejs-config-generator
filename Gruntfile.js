@@ -30,13 +30,9 @@ module.exports = function(grunt) {
 
     // Configuration to be run (and then tested).
     requirejs_config_generator: {
-      default_options: {
-        files: {
-          'tmp/config.js': ['test/fixtures/base.json', 'test/fixtures/testconfig.json', 'test/fixtures/testdeps.json']
-        }
-      },
       test: {
         files: {
+          'tmp/config.js': ['test/fixtures/base.json', 'test/fixtures/testconfig.json', 'test/fixtures/testdeps.json'],
           'tmp/config2.js': ['test/fixtures/base.json', 'test/fixtures/testconfig.json']
         }
       }
