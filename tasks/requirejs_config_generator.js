@@ -28,7 +28,8 @@ module.exports = function(grunt) {
         baseUrl: '',
         deps: [],
         paths: {},
-        shim: {}
+        shim: {},
+        packages: []
       };
       // Concat specified files.
       f.src.filter(function(filepath) {
@@ -54,6 +55,9 @@ module.exports = function(grunt) {
         }
         if (config.shim) {
           requirejsConfig.shim = _extend(requirejsConfig.shim, config.shim);
+        }
+        if (config.packages) {
+          requirejsConfig.packages = requirejsConfig.packages.concat(config.packages);
         }
       });
 
